@@ -35,7 +35,7 @@ If you're working from a Git repository:
 
 ```bash
 git clone <repository-url>
-cd grindr-interview-prep
+cd woofr
 ```
 
 If you already have the project locally, navigate directly to its root directory.
@@ -108,7 +108,7 @@ Keep this terminal running as well.
 ## Project Structure
 
 ```text
-grindr-interview-prep/
+woofr/
 ├── README.md
 ├── backend/
 │   ├── main.py
