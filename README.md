@@ -134,6 +134,35 @@ woofr/
 - The backend currently serves sample profile data.
 - React components and TypeScript interfaces are organized to encourage reusable, maintainable code.
 
+## Running Tests
+
+### Backend Tests
+
+The backend uses **pytest** and FastAPI's `TestClient` to test API endpoints, search functionality, availability filtering, and error handling.
+
+From the `backend/` directory, activate your Python virtual environment:
+
+```bash
+cd backend
+source .venv/bin/activate
+```
+
+Run all backend tests:
+
+```bash
+python -m pytest -v
+```
+
+The `-v` flag enables verbose output, displaying the result of each individual test.
+
+To run a specific test file:
+
+```bash
+python -m pytest tests/test_profiles.py -v
+```
+
+Tests run against the FastAPI application using `TestClient`, so **you do not need to start the backend server** before running them.
+
 ## Future Improvements
 
 - Add profile search and availability filters.
