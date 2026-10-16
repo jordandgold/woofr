@@ -21,3 +21,7 @@ dist/
 .DS_Store
 # SQLite
 *.db
+
+# User-uploaded profile photos (keep the folder, ignore its contents)
+server/static/dogs/uploads/*
+!server/static/dogs/uploads/.gitkeep

@@ -9,4 +9,11 @@ export interface Profile {
   bio: string
   imageUrl: string
   favorited: boolean
+  created_at: string
+}
+
+export type SortOption = "newest" | "nearest"
+
+export type NewProfile = Omit<Profile, "id" | "favorited" | "imageUrl" | "created_at"> & {
+  photo: File | null
 }

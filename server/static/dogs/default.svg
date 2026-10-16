@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Dog photo placeholder">
+  <rect width="320" height="320" fill="#e5e7eb"/>
+  <!-- shoulders -->
+  <path d="M40 320 Q50 245 120 235 H200 Q270 245 280 320 Z" fill="#9ca3af"/>
+  <!-- floppy ears hanging down the sides -->
+  <path d="M96 70 Q52 66 46 130 Q44 200 82 214 Q108 200 112 140 Z" fill="#6b7280"/>
+  <path d="M224 70 Q268 66 274 130 Q276 200 238 214 Q212 200 208 140 Z" fill="#6b7280"/>
+  <!-- head -->
+  <path d="M160 52 C112 52 98 92 100 134 C102 176 124 214 160 214 C196 214 218 176 220 134 C222 92 208 52 160 52 Z" fill="#9ca3af"/>
+  <!-- long muzzle -->
+  <path d="M160 128 C132 128 122 156 124 182 C126 208 142 224 160 224 C178 224 194 208 196 182 C198 156 188 128 160 128 Z" fill="#d1d5db"/>
+  <!-- forehead blaze -->
+  <path d="M160 54 C150 80 148 104 160 128 C172 104 170 80 160 54 Z" fill="#d1d5db"/>
+  <!-- eyes -->
+  <ellipse cx="132" cy="122" rx="8" ry="10" fill="#4b5563"/>
+  <ellipse cx="188" cy="122" rx="8" ry="10" fill="#4b5563"/>
+  <!-- nose -->
+  <path d="M142 160 Q160 148 178 160 Q176 178 160 182 Q144 178 142 160 Z" fill="#4b5563"/>
+  <!-- mouth and tongue -->
+  <path d="M160 182 V198 M160 198 Q146 210 134 200 M160 198 Q174 210 186 200" stroke="#4b5563" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M150 207 Q160 244 170 207 Q160 214 150 207 Z" fill="#9ca3af" stroke="#4b5563" stroke-width="3" stroke-linejoin="round"/>
+</svg>

@@ -20,7 +20,11 @@ def seed_db(target_engine) -> None:
     """Insert the starter profiles if the table is empty."""
     with Session(target_engine) as session:
         if session.exec(select(Profile)).first() is None:
-            session.add_all(Profile(**p.model_dump()) for p in seed_profiles)
+            # Copy field by field: model_dump() would turn created_at into the API string.
+            session.add_all(
+                Profile(**{name: getattr(p, name) for name in Profile.model_fields})
+                for p in seed_profiles
+            )
             session.commit()
 
 

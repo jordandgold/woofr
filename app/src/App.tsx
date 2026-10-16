@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import AddFlooferModal from "./components/AddFlooferModal"
 import ProfileCard from "./components/ProfileCard"
 import ProfileFilters from "./components/ProfileFilters"
 import { useProfiles } from "./context/profilesContext"
-import type { Profile } from "./types/Profile"
+import type { Profile, SortOption } from "./types/Profile"
 import "./App.css"
 
 export default function App() {
@@ -14,6 +15,8 @@ export default function App() {
   const [debouncedSearch, setDebouncedSearch] = useState("")
   const [searchTerm, setSearchTerm] = useState<string>("")
   const [availableOnly, setAvailableOnly] = useState<boolean>(false)
+  const [favoritesOnly, setFavoritesOnly] = useState<boolean>(false)
+  const [sort, setSort] = useState<SortOption>("newest")
 
   const onSearchChange = (searchTerm: string) => {
     setSearchTerm(searchTerm)
@@ -23,9 +26,27 @@ export default function App() {
     setAvailableOnly(checked)
   }
 
+  // Favorites are filtered here (not on the server) so un-favoriting a card
+  // removes it from the favorites view immediately.
+  const visibleProfiles = useMemo(
+    () =>
+      profiles
+        .filter((p) => !favoritesOnly || p.favorited)
+        .sort((a, b) =>
+          sort === "nearest"
+            ? a.distanceMiles - b.distanceMiles
+            : Date.parse(b.created_at) - Date.parse(a.created_at)
+        ),
+    [profiles, favoritesOnly, sort]
+  )
+
+  // Add Floofer
+  const [addModalOpen, setAddModalOpen] = useState(false)
+
   const onFilterClear = () => {
     setSearchTerm("")
     setAvailableOnly(false)
+    setFavoritesOnly(false)
   }
 
   useEffect(() => {
@@ -86,6 +107,13 @@ export default function App() {
         <p className="app-subtitle">
           Their new best friend could be just around the corner.
         </p>
+        <button
+          className="app-header__add"
+          type="button"
+          onClick={() => setAddModalOpen(true)}
+        >
+          + Add Floofer
+        </button>
       </header>
 
       <ProfileFilters
@@ -93,6 +121,10 @@ export default function App() {
         onSearchChange={onSearchChange}
         availableOnly={availableOnly}
         onAvailableOnlyChange={onAvailableOnlyChange}
+        favoritesOnly={favoritesOnly}
+        onFavoritesOnlyChange={setFavoritesOnly}
+        sort={sort}
+        onSortChange={setSort}
         onClear={onFilterClear}
       />
 
@@ -102,15 +134,24 @@ export default function App() {
         <div className="page-state">Finding your neighborhood... 🐾</div>
       ) : (
         <section className="profile-grid" aria-label="Neighborhood profiles">
-          {profiles.length > 0 ? (
-            profiles.map((profile) => (
+          {visibleProfiles.length > 0 ? (
+            visibleProfiles.map((profile) => (
               <ProfileCard key={profile.id} profile={profile} />
             ))
           ) : (
-            <p>No profiles found in your neighborhood yet!</p>
+            <p>
+              {favoritesOnly
+                ? "No favorites yet. Tap a heart to add one!"
+                : "No profiles found in your neighborhood yet!"}
+            </p>
           )}
         </section>
       )}
+
+      <AddFlooferModal
+        open={addModalOpen}
+        onClose={() => setAddModalOpen(false)}
+      />
     </main>
   )
 }

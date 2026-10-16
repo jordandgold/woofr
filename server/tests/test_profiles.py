@@ -91,3 +91,83 @@ def test_profiles_have_image_urls():
         response = client.get(profile["imageUrl"])
         assert response.status_code == 200
         assert response.headers["content-type"].startswith("image/jpeg")
+
+
+VALID_FORM = {
+    "name": "Pickles",
+    "breed": "Dalmatian",
+    "age": "3",
+    "distanceMiles": "1.5",
+    "available": "true",
+    "energyLevel": "high",
+    "bio": "Spotted and ready to play.",
+}
+
+
+def test_create_profile_without_photo_uses_default_image():
+    response = client.post("/api/profiles", data=VALID_FORM)
+
+    assert response.status_code == 201
+
+    created = response.json()
+
+    assert created["id"] == "25"
+    assert created["name"] == "Pickles"
+    assert created["favorited"] is False
+    assert created["imageUrl"] == "/api/static/dogs/default.svg"
+    assert len(client.get("/api/profiles").json()) == 25
+
+
+def test_create_profile_with_photo_saves_file(tmp_path, monkeypatch):
+    from routers import profiles
+
+    monkeypatch.setattr(profiles, "UPLOADS_DIR", tmp_path)
+
+    response = client.post(
+        "/api/profiles",
+        data=VALID_FORM,
+        files={"photo": ("../evil.png", b"\x89PNG fake", "image/png")},
+    )
+
+    assert response.status_code == 201
+
+    saved = list(tmp_path.iterdir())
+
+    assert len(saved) == 1
+    assert saved[0].suffix == ".png"
+    assert "evil" not in saved[0].name
+    assert response.json()["imageUrl"] == f"/api/static/dogs/uploads/{saved[0].name}"
+
+
+def test_create_profile_rejects_non_image(tmp_path, monkeypatch):
+    from routers import profiles
+
+    monkeypatch.setattr(profiles, "UPLOADS_DIR", tmp_path)
+
+    response = client.post(
+        "/api/profiles",
+        data=VALID_FORM,
+        files={"photo": ("notes.txt", b"hello", "text/plain")},
+    )
+
+    assert response.status_code == 415
+    assert list(tmp_path.iterdir()) == []
+    assert len(client.get("/api/profiles").json()) == 24
+
+
+def test_create_profile_validates_fields():
+    response = client.post("/api/profiles", data={**VALID_FORM, "energyLevel": "extreme"})
+
+    assert response.status_code == 422
+    assert len(client.get("/api/profiles").json()) == 24
+
+
+def test_profiles_include_created_at_and_new_ones_are_newest():
+    profiles = client.get("/api/profiles").json()
+
+    assert all(p["created_at"].endswith("Z") for p in profiles)
+
+    created = client.post("/api/profiles", data=VALID_FORM).json()
+
+    assert created["created_at"] > max(p["created_at"] for p in profiles)
+

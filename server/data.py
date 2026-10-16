@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from models import Profile
 
 seed_profiles = [
@@ -12,6 +14,7 @@ seed_profiles = [
         bio="Professional tennis ball enthusiast. Will trade friendship for treats.",
         imageUrl="/api/static/dogs/biscuit.jpg",
         favorited=False,
+        created_at=datetime(2026, 6, 3, 9, 0),
     ),
     Profile(
         id="2",
@@ -24,6 +27,7 @@ seed_profiles = [
         bio="Neighborhood nap champion. Selectively social.",
         imageUrl="/api/static/dogs/frank.jpg",
         favorited=False,
+        created_at=datetime(2026, 6, 8, 14, 0),
     ),
     Profile(
         id="3",
@@ -36,6 +40,7 @@ seed_profiles = [
         bio="Short legs, big personality. Seeking zoomie partners.",
         imageUrl="/api/static/dogs/luna.jpg",
         favorited=False,
+        created_at=datetime(2026, 6, 12, 10, 0),
     ),
     Profile(
         id="4",
@@ -48,6 +53,7 @@ seed_profiles = [
         bio="Independent queen. Must pass the vibe check.",
         imageUrl="/api/static/dogs/mochi.jpg",
         favorited=False,
+        created_at=datetime(2026, 6, 19, 16, 0),
     ),
     Profile(
         id="5",
@@ -60,6 +66,7 @@ seed_profiles = [
         bio="Still learning that other dogs' tennis balls aren't mine.",
         imageUrl="/api/static/dogs/teddy.jpg",
         favorited=False,
+        created_at=datetime(2026, 6, 27, 11, 0),
     ),
     Profile(
         id="6",
@@ -72,6 +79,7 @@ seed_profiles = [
         bio="Herds her humans to the dog park. Has opinions about squirrels.",
         imageUrl="/api/static/dogs/pepper.jpg",
         favorited=False,
+        created_at=datetime(2026, 7, 2, 18, 0),
     ),
     Profile(
         id="7",
@@ -84,6 +92,7 @@ seed_profiles = [
         bio="Long dog, short patience for stairs. Loves a good blanket burrito.",
         imageUrl="/api/static/dogs/waffles.jpg",
         favorited=False,
+        created_at=datetime(2026, 7, 9, 8, 0),
     ),
     Profile(
         id="8",
@@ -96,6 +105,7 @@ seed_profiles = [
         bio="Frisbee prodigy. Will happily run until the sun goes down.",
         imageUrl="/api/static/dogs/juniper.jpg",
         favorited=False,
+        created_at=datetime(2026, 7, 15, 13, 0),
     ),
     Profile(
         id="9",
@@ -108,6 +118,7 @@ seed_profiles = [
         bio="Gentle giant seeking shady spots and belly rubs.",
         imageUrl="/api/static/dogs/bruno.jpg",
         favorited=False,
+        created_at=datetime(2026, 7, 21, 19, 0),
     ),
     Profile(
         id="10",
@@ -120,6 +131,7 @@ seed_profiles = [
         bio="Snores professionally. Available for snack-related negotiations.",
         imageUrl="/api/static/dogs/olive.jpg",
         favorited=False,
+        created_at=datetime(2026, 7, 29, 10, 0),
     ),
     Profile(
         id="11",
@@ -132,6 +144,7 @@ seed_profiles = [
         bio="Nose-first explorer. If it smells interesting, she's already there.",
         imageUrl="/api/static/dogs/maple.jpg",
         favorited=False,
+        created_at=datetime(2026, 8, 3, 15, 0),
     ),
     Profile(
         id="12",
@@ -144,6 +157,7 @@ seed_profiles = [
         bio="Dramatic howler. Looking for a co-star in the next zoomie sequel.",
         imageUrl="/api/static/dogs/ziggy.jpg",
         favorited=False,
+        created_at=datetime(2026, 8, 8, 12, 0),
     ),
     Profile(
         id="13",
@@ -156,6 +170,7 @@ seed_profiles = [
         bio="Fancy haircut, feral heart. Will absolutely steal your sock.",
         imageUrl="/api/static/dogs/cooper.jpg",
         favorited=False,
+        created_at=datetime(2026, 8, 13, 9, 0),
     ),
     Profile(
         id="14",
@@ -168,6 +183,7 @@ seed_profiles = [
         bio="Total softie with a tough-guy résumé. Leans on everyone she loves.",
         imageUrl="/api/static/dogs/hazel.jpg",
         favorited=False,
+        created_at=datetime(2026, 8, 17, 17, 0),
     ),
     Profile(
         id="15",
@@ -180,6 +196,7 @@ seed_profiles = [
         bio="Bounces first, asks questions never. Great at greeting mailmen.",
         imageUrl="/api/static/dogs/rocky.jpg",
         favorited=False,
+        created_at=datetime(2026, 8, 22, 14, 0),
     ),
     Profile(
         id="16",
@@ -192,6 +209,7 @@ seed_profiles = [
         bio="Elegant on the outside, goofball on the inside.",
         imageUrl="/api/static/dogs/daisy.jpg",
         favorited=False,
+        created_at=datetime(2026, 8, 26, 11, 0),
     ),
     Profile(
         id="17",
@@ -204,6 +222,7 @@ seed_profiles = [
         bio="Walking cloud. Smiles at strangers and sheds on them too.",
         imageUrl="/api/static/dogs/finn.jpg",
         favorited=False,
+        created_at=datetime(2026, 8, 30, 16, 0),
     ),
     Profile(
         id="18",
@@ -216,6 +235,7 @@ seed_profiles = [
         bio="Senior sweetheart. Enjoys slow sniffy strolls and ear scratches.",
         imageUrl="/api/static/dogs/penny.jpg",
         favorited=False,
+        created_at=datetime(2026, 9, 3, 10, 0),
     ),
     Profile(
         id="19",
@@ -228,6 +248,7 @@ seed_profiles = [
         bio="Tiny but fearless. Barks at things ten times his size.",
         imageUrl="/api/static/dogs/gizmo.jpg",
         favorited=False,
+        created_at=datetime(2026, 9, 7, 13, 0),
     ),
     Profile(
         id="20",
@@ -240,6 +261,7 @@ seed_profiles = [
         bio="Distinguished beard, undistinguished manners at dinnertime.",
         imageUrl="/api/static/dogs/stella.jpg",
         favorited=False,
+        created_at=datetime(2026, 9, 11, 18, 0),
     ),
     Profile(
         id="21",
@@ -252,6 +274,7 @@ seed_profiles = [
         bio="Built for snow, living in the suburbs. Dramatic about summer.",
         imageUrl="/api/static/dogs/murphy.jpg",
         favorited=False,
+        created_at=datetime(2026, 9, 15, 9, 0),
     ),
     Profile(
         id="22",
@@ -264,6 +287,7 @@ seed_profiles = [
         bio="Zero to sprint in two seconds, then a long nap on the couch.",
         imageUrl="/api/static/dogs/rosie.jpg",
         favorited=False,
+        created_at=datetime(2026, 9, 19, 15, 0),
     ),
     Profile(
         id="23",
@@ -276,6 +300,7 @@ seed_profiles = [
         bio="Grumpy old gentleman with a heart of gold. Hates the vacuum.",
         imageUrl="/api/static/dogs/oscar.jpg",
         favorited=False,
+        created_at=datetime(2026, 9, 23, 12, 0),
     ),
     Profile(
         id="24",
@@ -288,5 +313,6 @@ seed_profiles = [
         bio="Snorts when happy, which is always. Moves at her own pace.",
         imageUrl="/api/static/dogs/willow.jpg",
         favorited=False,
+        created_at=datetime(2026, 9, 28, 17, 0),
     ),
 ]

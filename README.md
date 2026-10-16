@@ -122,6 +122,7 @@ woofr/
 │   │   ├── profiles.py    # /api/profiles, /api/available-names
 │   │   └── favorites.py   # /api/favorites
 │   ├── static/dogs/       # Profile photos, served at /api/static/dogs/
+│   │   └── uploads/       # User-uploaded photos (git-ignored)
 │   ├── requirements.txt
 │   └── tests/
 └── app/
@@ -143,6 +144,7 @@ woofr/
 | Method   | Path                       | Description                                                                 |
 | -------- | -------------------------- | --------------------------------------------------------------------------- |
 | `GET`    | `/api/profiles`            | List profiles. Optional `search` (name or breed) and `availableOnly=true`.   |
+| `POST`   | `/api/profiles`            | Create a profile (multipart form, optional `photo`). Returns 201 with the new profile. |
 | `GET`    | `/api/available-names`     | Sorted names of available profiles.                                         |
 | `GET`    | `/api/favorites`           | List favorited profiles.                                                    |
 | `PUT`    | `/api/favorites/{id}`      | Favorite a profile (204). Safe to repeat; 404 if the id doesn't exist.      |
@@ -157,7 +159,8 @@ woofr/
 - Profiles are stored in SQLite and seeded from `server/data.py` the first time the server starts.
 - Favorites are stored on the profile row and are shared by everyone using the server; there is no user concept yet.
 - Changing a model column does not alter an existing database (there are no migrations). Delete `woofr.db` and restart to reseed.
-- Profile photos in `server/static/dogs/` come from the [Dog CEO API](https://dog.ceo/dog-api/) (Stanford Dogs dataset), which is fine for a demo but check licensing before commercial use.
+- Uploaded photos are saved to `server/static/dogs/uploads/` (git-ignored). Profiles without a photo use the gray placeholder `server/static/dogs/default.svg`.
+- Seed profile photos in `server/static/dogs/` come from the [Dog CEO API](https://dog.ceo/dog-api/) (Stanford Dogs dataset), which is fine for a demo but check licensing before commercial use.
 - Profiles are kept in a React context (`app/src/context/`) so a card can update its own record after favoriting.
 - React components and TypeScript interfaces are organized to encourage reusable, maintainable code.
 
