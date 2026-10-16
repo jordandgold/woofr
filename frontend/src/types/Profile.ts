@@ -8,4 +8,5 @@ export interface Profile {
   energyLevel: "low" | "medium" | "high"
   bio: string
   imageUrl: string
+  favorited: boolean
 }

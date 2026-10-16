@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 
-
 class Profile(BaseModel):
     id: str
     name: str
@@ -11,3 +10,4 @@ class Profile(BaseModel):
     energyLevel: str
     bio: str
     imageUrl: str
+    favorited: bool

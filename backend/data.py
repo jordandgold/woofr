@@ -11,6 +11,7 @@ profiles = [
         energyLevel="high",
         bio="Professional tennis ball enthusiast. Will trade friendship for treats.",
         imageUrl="/api/static/dogs/biscuit.jpg",
+        favorited=False,
     ),
     Profile(
         id="2",
@@ -22,6 +23,7 @@ profiles = [
         energyLevel="low",
         bio="Neighborhood nap champion. Selectively social.",
         imageUrl="/api/static/dogs/frank.jpg",
+        favorited=False,
     ),
     Profile(
         id="3",
@@ -33,6 +35,7 @@ profiles = [
         energyLevel="high",
         bio="Short legs, big personality. Seeking zoomie partners.",
         imageUrl="/api/static/dogs/luna.jpg",
+        favorited=False,
     ),
     Profile(
         id="4",
@@ -44,6 +47,7 @@ profiles = [
         energyLevel="medium",
         bio="Independent queen. Must pass the vibe check.",
         imageUrl="/api/static/dogs/mochi.jpg",
+        favorited=False,
     ),
     Profile(
         id="5",
@@ -55,6 +59,7 @@ profiles = [
         energyLevel="high",
         bio="Still learning that other dogs' tennis balls aren't mine.",
         imageUrl="/api/static/dogs/teddy.jpg",
+        favorited=False,
     ),
     Profile(
         id="6",
@@ -66,6 +71,7 @@ profiles = [
         energyLevel="high",
         bio="Herds her humans to the dog park. Has opinions about squirrels.",
         imageUrl="/api/static/dogs/pepper.jpg",
+        favorited=False,
     ),
     Profile(
         id="7",
@@ -77,6 +83,7 @@ profiles = [
         energyLevel="low",
         bio="Long dog, short patience for stairs. Loves a good blanket burrito.",
         imageUrl="/api/static/dogs/waffles.jpg",
+        favorited=False,
     ),
     Profile(
         id="8",
@@ -88,6 +95,7 @@ profiles = [
         energyLevel="high",
         bio="Frisbee prodigy. Will happily run until the sun goes down.",
         imageUrl="/api/static/dogs/juniper.jpg",
+        favorited=False,
     ),
     Profile(
         id="9",
@@ -99,6 +107,7 @@ profiles = [
         energyLevel="medium",
         bio="Gentle giant seeking shady spots and belly rubs.",
         imageUrl="/api/static/dogs/bruno.jpg",
+        favorited=False,
     ),
     Profile(
         id="10",
@@ -110,6 +119,7 @@ profiles = [
         energyLevel="low",
         bio="Snores professionally. Available for snack-related negotiations.",
         imageUrl="/api/static/dogs/olive.jpg",
+        favorited=False,
     ),
     Profile(
         id="11",
@@ -121,6 +131,7 @@ profiles = [
         energyLevel="medium",
         bio="Nose-first explorer. If it smells interesting, she's already there.",
         imageUrl="/api/static/dogs/maple.jpg",
+        favorited=False,
     ),
     Profile(
         id="12",
@@ -132,6 +143,7 @@ profiles = [
         energyLevel="high",
         bio="Dramatic howler. Looking for a co-star in the next zoomie sequel.",
         imageUrl="/api/static/dogs/ziggy.jpg",
+        favorited=False,
     ),
     Profile(
         id="13",
@@ -143,6 +155,7 @@ profiles = [
         energyLevel="high",
         bio="Fancy haircut, feral heart. Will absolutely steal your sock.",
         imageUrl="/api/static/dogs/cooper.jpg",
+        favorited=False,
     ),
     Profile(
         id="14",
@@ -154,6 +167,7 @@ profiles = [
         energyLevel="medium",
         bio="Total softie with a tough-guy résumé. Leans on everyone she loves.",
         imageUrl="/api/static/dogs/hazel.jpg",
+        favorited=False,
     ),
     Profile(
         id="15",
@@ -165,6 +179,7 @@ profiles = [
         energyLevel="high",
         bio="Bounces first, asks questions never. Great at greeting mailmen.",
         imageUrl="/api/static/dogs/rocky.jpg",
+        favorited=False,
     ),
     Profile(
         id="16",
@@ -176,6 +191,7 @@ profiles = [
         energyLevel="medium",
         bio="Elegant on the outside, goofball on the inside.",
         imageUrl="/api/static/dogs/daisy.jpg",
+        favorited=False,
     ),
     Profile(
         id="17",
@@ -187,6 +203,7 @@ profiles = [
         energyLevel="high",
         bio="Walking cloud. Smiles at strangers and sheds on them too.",
         imageUrl="/api/static/dogs/finn.jpg",
+        favorited=False,
     ),
     Profile(
         id="18",
@@ -198,6 +215,7 @@ profiles = [
         energyLevel="low",
         bio="Senior sweetheart. Enjoys slow sniffy strolls and ear scratches.",
         imageUrl="/api/static/dogs/penny.jpg",
+        favorited=False,
     ),
     Profile(
         id="19",
@@ -209,6 +227,7 @@ profiles = [
         energyLevel="high",
         bio="Tiny but fearless. Barks at things ten times his size.",
         imageUrl="/api/static/dogs/gizmo.jpg",
+        favorited=False,
     ),
     Profile(
         id="20",
@@ -220,6 +239,7 @@ profiles = [
         energyLevel="medium",
         bio="Distinguished beard, undistinguished manners at dinnertime.",
         imageUrl="/api/static/dogs/stella.jpg",
+        favorited=False,
     ),
     Profile(
         id="21",
@@ -231,6 +251,7 @@ profiles = [
         energyLevel="high",
         bio="Built for snow, living in the suburbs. Dramatic about summer.",
         imageUrl="/api/static/dogs/murphy.jpg",
+        favorited=False,
     ),
     Profile(
         id="22",
@@ -242,6 +263,7 @@ profiles = [
         energyLevel="high",
         bio="Zero to sprint in two seconds, then a long nap on the couch.",
         imageUrl="/api/static/dogs/rosie.jpg",
+        favorited=False,
     ),
     Profile(
         id="23",
@@ -253,6 +275,7 @@ profiles = [
         energyLevel="low",
         bio="Grumpy old gentleman with a heart of gold. Hates the vacuum.",
         imageUrl="/api/static/dogs/oscar.jpg",
+        favorited=False,
     ),
     Profile(
         id="24",
@@ -264,5 +287,6 @@ profiles = [
         energyLevel="low",
         bio="Snorts when happy, which is always. Moves at her own pace.",
         imageUrl="/api/static/dogs/willow.jpg",
+        favorited=False,
     ),
 ]

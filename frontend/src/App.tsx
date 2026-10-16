@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import ProfileCard from "./components/ProfileCard"
 import ProfileFilters from "./components/ProfileFilters"
+import { useProfiles } from "./context/profilesContext"
 import type { Profile } from "./types/Profile"
 import "./App.css"
 
 export default function App() {
-  const [profiles, setProfiles] = useState<Profile[]>([])
+  const { profiles, setProfiles } = useProfiles()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -73,7 +74,7 @@ export default function App() {
     fetchProfiles()
 
     return () => controller.abort()
-  }, [debouncedSearch, availableOnly])
+  }, [debouncedSearch, availableOnly, setProfiles])
 
   return (
     <main className="app">
