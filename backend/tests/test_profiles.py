@@ -11,7 +11,7 @@ def test_get_all_profiles():
     data = response.json()
     
     assert isinstance(data, list)
-    assert len(data) == 12
+    assert len(data) == 24
 
 def test_get_search_by_name():
     response = client.get("/api/profiles?search=Luna")
@@ -72,7 +72,7 @@ def test_filter_available_only_true():
     
     data = response.json()
 
-    assert len(data) == 8
+    assert len(data) == 16
     for profile in data:
         assert profile["available"] is True
 
@@ -90,4 +90,4 @@ def test_profiles_have_image_urls():
     for profile in data:
         response = client.get(profile["imageUrl"])
         assert response.status_code == 200
-        assert response.headers["content-type"].startswith("image/svg+xml")
+        assert response.headers["content-type"].startswith("image/jpeg")
