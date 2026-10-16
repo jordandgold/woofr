@@ -246,6 +246,15 @@
   box-shadow: var(--shadow-card-hover);
 }
 
+.profile-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
 .profile-card__header {
   display: flex;
   align-items: flex-start;

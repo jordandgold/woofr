@@ -7,4 +7,5 @@ export interface Profile {
   available: boolean
   energyLevel: "low" | "medium" | "high"
   bio: string
+  imageUrl: string
 }

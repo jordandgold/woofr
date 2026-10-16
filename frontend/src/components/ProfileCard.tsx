@@ -7,6 +7,12 @@ interface ProfileCardProps {
 export default function ProfileCard({ profile }: ProfileCardProps) {
   return (
     <article className="profile-card">
+      <img
+        className="profile-card__image"
+        src={profile.imageUrl}
+        alt={`${profile.name} the ${profile.breed}`}
+        loading="lazy"
+      />
       <div className="profile-card__header">
         <div>
           <h2>{profile.name}</h2>
