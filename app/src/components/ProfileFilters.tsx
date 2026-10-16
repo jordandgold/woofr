@@ -56,26 +56,28 @@ export default function ProfileFilters({
         <span>Ready to play only</span>
       </label>
 
-      <button
-        className={`profile-filters__favorites ${
-          favoritesOnly ? "profile-filters__favorites--active" : ""
-        }`}
-        type="button"
-        aria-label="Show favorites only"
-        aria-pressed={favoritesOnly}
-        title="Favorites"
-        onClick={() => onFavoritesOnlyChange(!favoritesOnly)}
-      >
-        <HeartIcon />
-      </button>
+      <div className="profile-filters__actions">
+        <button
+          className={`profile-filters__favorites ${
+            favoritesOnly ? "profile-filters__favorites--active" : ""
+          }`}
+          type="button"
+          aria-label="Show favorites only"
+          aria-pressed={favoritesOnly}
+          title="Favorites"
+          onClick={() => onFavoritesOnlyChange(!favoritesOnly)}
+        >
+          <HeartIcon />
+        </button>
 
-      <button
-        className="profile-filters__clear"
-        type="button"
-        onClick={onClear}
-      >
-        Clear filters
-      </button>
+        <button
+          className="profile-filters__clear"
+          type="button"
+          onClick={onClear}
+        >
+          Clear filters
+        </button>
+      </div>
     </section>
   )
 }

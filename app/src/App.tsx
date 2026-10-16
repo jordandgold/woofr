@@ -100,13 +100,14 @@ export default function App() {
   return (
     <main className="app">
       <header className="app-header">
-        <p className="app-eyebrow">YOUR NEIGHBORHOOD, THEIR PLAYGROUND</p>
-        <h1>
-          Woofr<span>🐾</span>
-        </h1>
-        <p className="app-subtitle">
-          Their new best friend could be just around the corner.
-        </p>
+        <div className="app-header__brand">
+          <h1>
+            Woofr<span>🐾</span>
+          </h1>
+          <p className="app-subtitle">
+            Their new best friend could be just around the corner.
+          </p>
+        </div>
         <button
           className="app-header__add"
           type="button"
@@ -116,37 +117,43 @@ export default function App() {
         </button>
       </header>
 
-      <ProfileFilters
-        search={searchTerm}
-        onSearchChange={onSearchChange}
-        availableOnly={availableOnly}
-        onAvailableOnlyChange={onAvailableOnlyChange}
-        favoritesOnly={favoritesOnly}
-        onFavoritesOnlyChange={setFavoritesOnly}
-        sort={sort}
-        onSortChange={setSort}
-        onClear={onFilterClear}
-      />
+      <div className="app-layout">
+        <aside className="app-sidebar">
+          <ProfileFilters
+            search={searchTerm}
+            onSearchChange={onSearchChange}
+            availableOnly={availableOnly}
+            onAvailableOnlyChange={onAvailableOnlyChange}
+            favoritesOnly={favoritesOnly}
+            onFavoritesOnlyChange={setFavoritesOnly}
+            sort={sort}
+            onSortChange={setSort}
+            onClear={onFilterClear}
+          />
+        </aside>
 
-      {error ? (
-        <div className="page-state">{error}</div>
-      ) : loading ? (
-        <div className="page-state">Finding your neighborhood... 🐾</div>
-      ) : (
-        <section className="profile-grid" aria-label="Neighborhood profiles">
-          {visibleProfiles.length > 0 ? (
-            visibleProfiles.map((profile) => (
-              <ProfileCard key={profile.id} profile={profile} />
-            ))
+        <div className="app-content">
+          {error ? (
+            <div className="page-state">{error}</div>
+          ) : loading ? (
+            <div className="page-state">Finding your neighborhood... 🐾</div>
           ) : (
-            <p>
-              {favoritesOnly
-                ? "No favorites yet. Tap a heart to add one!"
-                : "No profiles found in your neighborhood yet!"}
-            </p>
+            <section className="profile-grid" aria-label="Neighborhood profiles">
+              {visibleProfiles.length > 0 ? (
+                visibleProfiles.map((profile) => (
+                  <ProfileCard key={profile.id} profile={profile} />
+                ))
+              ) : (
+                <p>
+                  {favoritesOnly
+                    ? "No favorites yet. Tap a heart to add one!"
+                    : "No profiles found in your neighborhood yet!"}
+                </p>
+              )}
+            </section>
           )}
-        </section>
-      )}
+        </div>
+      </div>
 
       <AddFlooferModal
         open={addModalOpen}
