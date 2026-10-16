@@ -6,14 +6,14 @@ This project serves as a full-stack engineering practice environment, with a foc
 
 ## Tech Stack
 
-**Frontend**
+**App (frontend)**
 
 - React
 - TypeScript
 - Vite
 - CSS
 
-**Backend**
+**Server (backend)**
 
 - Python
 - FastAPI
@@ -41,12 +41,12 @@ cd woofr
 
 If you already have the project locally, navigate directly to its root directory.
 
-### 2. Start the backend
+### 2. Start the server
 
-Open a terminal and navigate to the backend directory:
+Open a terminal and navigate to the server directory:
 
 ```bash
-cd backend
+cd server
 ```
 
 Create a virtual environment if you haven't already:
@@ -78,16 +78,16 @@ The API will be available at:
 - **API:** http://localhost:8000/api/profiles
 - **Interactive API documentation:** http://localhost:8000/docs
 
-On first start the server creates a SQLite database (`backend/woofr.db`) and seeds it with the starter profiles. Favorites are saved there, so they persist across restarts. To reset the data, stop the server, delete `woofr.db`, and start it again.
+On first start the server creates a SQLite database (`server/woofr.db`) and seeds it with the starter profiles. Favorites are saved there, so they persist across restarts. To reset the data, stop the server, delete `woofr.db`, and start it again.
 
 Keep this terminal running.
 
-### 3. Start the frontend
+### 3. Start the app
 
-Open a second terminal and navigate to the frontend directory:
+Open a second terminal and navigate to the app directory:
 
 ```bash
-cd frontend
+cd app
 ```
 
 Install dependencies:
@@ -113,7 +113,7 @@ Keep this terminal running as well.
 ```text
 woofr/
 ├── README.md
-├── backend/
+├── server/
 │   ├── main.py            # App setup: middleware, static files, routers
 │   ├── models.py          # Profile model (SQLModel table)
 │   ├── db.py              # SQLite engine, session dependency, seeding
@@ -124,7 +124,7 @@ woofr/
 │   ├── static/dogs/       # Profile photos, served at /api/static/dogs/
 │   ├── requirements.txt
 │   └── tests/
-└── frontend/
+└── app/
     ├── public/
     ├── src/
     │   ├── components/
@@ -151,30 +151,30 @@ woofr/
 
 ## Development Notes
 
-- The frontend runs on port `5173`.
-- The backend runs on port `8000`.
-- Vite proxies `/api` requests to the backend during development.
-- Profiles are stored in SQLite and seeded from `backend/data.py` the first time the server starts.
+- The app (frontend) runs on port `5173`.
+- The server (backend) runs on port `8000`.
+- Vite proxies `/api` requests to the server during development.
+- Profiles are stored in SQLite and seeded from `server/data.py` the first time the server starts.
 - Favorites are stored on the profile row and are shared by everyone using the server; there is no user concept yet.
 - Changing a model column does not alter an existing database (there are no migrations). Delete `woofr.db` and restart to reseed.
-- Profile photos in `backend/static/dogs/` come from the [Dog CEO API](https://dog.ceo/dog-api/) (Stanford Dogs dataset), which is fine for a demo but check licensing before commercial use.
-- Profiles are kept in a React context (`frontend/src/context/`) so a card can update its own record after favoriting.
+- Profile photos in `server/static/dogs/` come from the [Dog CEO API](https://dog.ceo/dog-api/) (Stanford Dogs dataset), which is fine for a demo but check licensing before commercial use.
+- Profiles are kept in a React context (`app/src/context/`) so a card can update its own record after favoriting.
 - React components and TypeScript interfaces are organized to encourage reusable, maintainable code.
 
 ## Running Tests
 
-### Backend Tests
+### Server Tests
 
-The backend uses **pytest** and FastAPI's `TestClient` to test API endpoints, search functionality, availability filtering, favorites, and error handling.
+The server uses **pytest** and FastAPI's `TestClient` to test API endpoints, search functionality, availability filtering, favorites, and error handling.
 
-From the `backend/` directory, activate your Python virtual environment:
+From the `server/` directory, activate your Python virtual environment:
 
 ```bash
-cd backend
+cd server
 source .venv/bin/activate
 ```
 
-Run all backend tests:
+Run all server tests:
 
 ```bash
 python -m pytest -v
@@ -188,12 +188,12 @@ To run a specific test file:
 python -m pytest tests/test_profiles.py -v
 ```
 
-Tests run against the FastAPI application using `TestClient`, so **you do not need to start the backend server** before running them. Each test gets a fresh in-memory SQLite database seeded with the starter profiles (see `tests/conftest.py`), so tests never touch `woofr.db`.
+Tests run against the FastAPI application using `TestClient`, so **you do not need to start the server** before running them. Each test gets a fresh in-memory SQLite database seeded with the starter profiles (see `tests/conftest.py`), so tests never touch `woofr.db`.
 
 ## Future Improvements
 
 - Per-user favorites (requires users or sessions) and a "favorites only" view.
 - Database migrations (e.g. Alembic) in place of deleting `woofr.db`.
 - Optimistic updates and an in-flight guard on the favorite button.
-- Automated frontend tests.
+- Automated app tests.
 - Improve accessibility and responsive behavior.
