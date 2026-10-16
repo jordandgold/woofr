@@ -1,17 +1,8 @@
-import pytest
 from fastapi.testclient import TestClient
 
 from main import app
-from routers import favorites
 
 client = TestClient(app)
-
-
-@pytest.fixture(autouse=True)
-def reset_favorites():
-    favorites.favorite_ids.clear()
-    yield
-    favorites.favorite_ids.clear()
 
 
 def test_favorites_empty_by_default():
@@ -46,3 +37,16 @@ def test_remove_favorite():
 def test_unknown_profile_returns_404():
     assert client.put("/api/favorites/999").status_code == 404
     assert client.delete("/api/favorites/999").status_code == 404
+
+
+def test_favorited_flag_reflected_in_profiles():
+    client.put("/api/favorites/3")
+
+    profiles = {p["id"]: p for p in client.get("/api/profiles").json()}
+
+    assert profiles["3"]["favorited"] is True
+    assert profiles["1"]["favorited"] is False
+
+    client.delete("/api/favorites/3")
+
+    assert client.get("/api/profiles").json()[2]["favorited"] is False

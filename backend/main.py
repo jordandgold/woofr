@@ -1,11 +1,20 @@
+from contextlib import asynccontextmanager
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from db import init_db
 from routers import favorites, profiles
 
-app = FastAPI(title="Woofr API")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
+
+
+app = FastAPI(title="Woofr API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

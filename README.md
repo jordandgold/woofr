@@ -1,6 +1,6 @@
 # Woofr 🐾
 
-A neighborhood discovery app built with React, TypeScript, and FastAPI. Users can browse nearby profiles and explore potential matches.
+A neighborhood discovery app built with React, TypeScript, and FastAPI. Users can browse nearby dog profiles with photos, search and filter them, and favorite the ones they like.
 
 This project serves as a full-stack engineering practice environment, with a focus on frontend development, API integration, and building interactive user experiences.
 
@@ -17,7 +17,8 @@ This project serves as a full-stack engineering practice environment, with a foc
 
 - Python
 - FastAPI
-- Pydantic
+- SQLModel (SQLAlchemy + Pydantic)
+- SQLite
 
 ## Prerequisites
 
@@ -77,6 +78,8 @@ The API will be available at:
 - **API:** http://localhost:8000/api/profiles
 - **Interactive API documentation:** http://localhost:8000/docs
 
+On first start the server creates a SQLite database (`backend/woofr.db`) and seeds it with the starter profiles. Favorites are saved there, so they persist across restarts. To reset the data, stop the server, delete `woofr.db`, and start it again.
+
 Keep this terminal running.
 
 ### 3. Start the frontend
@@ -111,12 +114,21 @@ Keep this terminal running as well.
 woofr/
 ├── README.md
 ├── backend/
-│   ├── main.py
+│   ├── main.py            # App setup: middleware, static files, routers
+│   ├── models.py          # Profile model (SQLModel table)
+│   ├── db.py              # SQLite engine, session dependency, seeding
+│   ├── data.py            # Starter profiles used to seed the database
+│   ├── routers/
+│   │   ├── profiles.py    # /api/profiles, /api/available-names
+│   │   └── favorites.py   # /api/favorites
+│   ├── static/dogs/       # Profile photos, served at /api/static/dogs/
 │   ├── requirements.txt
 │   └── tests/
 └── frontend/
+    ├── public/
     ├── src/
     │   ├── components/
+    │   ├── context/       # ProfilesContext + useProfiles hook
     │   ├── types/
     │   ├── App.tsx
     │   ├── App.css
@@ -126,19 +138,34 @@ woofr/
     └── vite.config.ts
 ```
 
+## API Endpoints
+
+| Method   | Path                       | Description                                                                 |
+| -------- | -------------------------- | --------------------------------------------------------------------------- |
+| `GET`    | `/api/profiles`            | List profiles. Optional `search` (name or breed) and `availableOnly=true`.   |
+| `GET`    | `/api/available-names`     | Sorted names of available profiles.                                         |
+| `GET`    | `/api/favorites`           | List favorited profiles.                                                    |
+| `PUT`    | `/api/favorites/{id}`      | Favorite a profile (204). Safe to repeat; 404 if the id doesn't exist.      |
+| `DELETE` | `/api/favorites/{id}`      | Remove a favorite (204); 404 if the id doesn't exist.                       |
+| `GET`    | `/api/static/dogs/{name}.jpg` | Profile photo.                                                           |
+
 ## Development Notes
 
 - The frontend runs on port `5173`.
 - The backend runs on port `8000`.
 - Vite proxies `/api` requests to the backend during development.
-- The backend currently serves sample profile data.
+- Profiles are stored in SQLite and seeded from `backend/data.py` the first time the server starts.
+- Favorites are stored on the profile row and are shared by everyone using the server; there is no user concept yet.
+- Changing a model column does not alter an existing database (there are no migrations). Delete `woofr.db` and restart to reseed.
+- Profile photos in `backend/static/dogs/` come from the [Dog CEO API](https://dog.ceo/dog-api/) (Stanford Dogs dataset), which is fine for a demo but check licensing before commercial use.
+- Profiles are kept in a React context (`frontend/src/context/`) so a card can update its own record after favoriting.
 - React components and TypeScript interfaces are organized to encourage reusable, maintainable code.
 
 ## Running Tests
 
 ### Backend Tests
 
-The backend uses **pytest** and FastAPI's `TestClient` to test API endpoints, search functionality, availability filtering, and error handling.
+The backend uses **pytest** and FastAPI's `TestClient` to test API endpoints, search functionality, availability filtering, favorites, and error handling.
 
 From the `backend/` directory, activate your Python virtual environment:
 
@@ -161,12 +188,12 @@ To run a specific test file:
 python -m pytest tests/test_profiles.py -v
 ```
 
-Tests run against the FastAPI application using `TestClient`, so **you do not need to start the backend server** before running them.
+Tests run against the FastAPI application using `TestClient`, so **you do not need to start the backend server** before running them. Each test gets a fresh in-memory SQLite database seeded with the starter profiles (see `tests/conftest.py`), so tests never touch `woofr.db`.
 
 ## Future Improvements
 
-- Add profile search and availability filters.
-- Add loading, error, and empty states.
-- Implement backend filtering and query parameters.
-- Add automated frontend and backend tests.
+- Per-user favorites (requires users or sessions) and a "favorites only" view.
+- Database migrations (e.g. Alembic) in place of deleting `woofr.db`.
+- Optimistic updates and an in-flight guard on the favorite button.
+- Automated frontend tests.
 - Improve accessibility and responsive behavior.

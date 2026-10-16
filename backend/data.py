@@ -1,6 +1,6 @@
 from models import Profile
 
-profiles = [
+seed_profiles = [
     Profile(
         id="1",
         name="Biscuit",

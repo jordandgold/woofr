@@ -1,6 +1,8 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import Integer, cast, or_
+from sqlmodel import Session, col, select
 
-from data import profiles
+from db import get_session
 from models import Profile
 
 router = APIRouter(prefix="/api", tags=["profiles"])
@@ -15,22 +17,24 @@ router = APIRouter(prefix="/api", tags=["profiles"])
 def get_profiles(
         search: str | None = None,
         availableOnly: bool = False,
+        session: Session = Depends(get_session),
     ):
 
     try:
-        filtered_profiles = profiles
+        statement = select(Profile).order_by(cast(Profile.id, Integer))
 
         if availableOnly:
-            filtered_profiles = [p for p in filtered_profiles if p.available]
+            statement = statement.where(col(Profile.available).is_(True))
 
         if search:
-            search_lower = search.lower()
-            filtered_profiles = [
-                p for p in filtered_profiles
-                if search_lower in p.name.casefold() or search_lower in p.breed.casefold()
-            ]
+            statement = statement.where(
+                or_(
+                    col(Profile.name).icontains(search, autoescape=True),
+                    col(Profile.breed).icontains(search, autoescape=True),
+                )
+            )
 
-        return filtered_profiles
+        return session.exec(statement).all()
 
     except Exception as e:
         raise HTTPException(
@@ -39,8 +43,12 @@ def get_profiles(
         )
 
 @router.get("/available-names", response_model=list[str])
-def get_available_names():
+def get_available_names(session: Session = Depends(get_session)):
 
-    available_profiles = [p for p in profiles if p.available is True]
+    statement = (
+        select(Profile.name)
+        .where(col(Profile.available).is_(True))
+        .order_by(Profile.name)
+    )
 
-    return sorted([p.name for p in available_profiles])
+    return session.exec(statement).all()

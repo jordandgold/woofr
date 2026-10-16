@@ -1,7 +1,8 @@
-from pydantic import BaseModel
+from sqlmodel import Field, SQLModel
 
-class Profile(BaseModel):
-    id: str
+
+class Profile(SQLModel, table=True):
+    id: str = Field(primary_key=True)
     name: str
     breed: str
     age: int
@@ -10,4 +11,4 @@ class Profile(BaseModel):
     energyLevel: str
     bio: str
     imageUrl: str
-    favorited: bool
+    favorited: bool = False
