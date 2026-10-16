@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, type CSSProperties } from "react"
 import AddFlooferModal from "./components/AddFlooferModal"
 import ProfileCard from "./components/ProfileCard"
+import ProfileCardSkeleton from "./components/ProfileCardSkeleton"
 import ProfileFilters from "./components/ProfileFilters"
 import { useProfiles } from "./context/profilesContext"
 import type { Profile, SortOption } from "./types/Profile"
@@ -136,12 +137,30 @@ export default function App() {
           {error ? (
             <div className="page-state">{error}</div>
           ) : loading ? (
-            <div className="page-state">Finding your neighborhood... 🐾</div>
+            <section
+              className="profile-grid"
+              aria-label="Neighborhood profiles"
+              aria-busy="true"
+            >
+              <p className="visually-hidden" role="status">
+                Finding your neighborhood...
+              </p>
+              {Array.from({ length: 6 }, (_, i) => (
+                <ProfileCardSkeleton key={i} />
+              ))}
+            </section>
           ) : (
             <section className="profile-grid" aria-label="Neighborhood profiles">
               {visibleProfiles.length > 0 ? (
-                visibleProfiles.map((profile) => (
-                  <ProfileCard key={profile.id} profile={profile} />
+                visibleProfiles.map((profile, index) => (
+                  <div
+                    key={profile.id}
+                    className="profile-grid__item"
+                    // Stagger the entrance, capped so long lists don't drag on.
+                    style={{ "--index": Math.min(index, 12) } as CSSProperties}
+                  >
+                    <ProfileCard profile={profile} />
+                  </div>
                 ))
               ) : (
                 <p>

@@ -586,6 +586,123 @@
   }
 }
 
+.profile-grid__item {
+  display: flex;
+  min-width: 0;
+  animation: card-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--index, 0) * 45ms);
+}
+
+.profile-grid__item > .profile-card {
+  flex: 1;
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* =========================================
+   Loading Skeleton
+   ========================================= */
+
+.profile-card--skeleton {
+  gap: 0;
+  pointer-events: none;
+}
+
+.profile-card--skeleton:hover {
+  transform: none;
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.skeleton {
+  border-radius: var(--radius-sm);
+  background-color: #eef1f0;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgb(255 255 255 / 70%) 50%,
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+.skeleton--image {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.skeleton--title {
+  width: 55%;
+  height: 22px;
+  margin-bottom: 10px;
+}
+
+.skeleton--subtitle {
+  width: 40%;
+  height: 14px;
+}
+
+.skeleton-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.skeleton--chip {
+  width: 84px;
+  height: 28px;
+}
+
+.skeleton--line {
+  height: 14px;
+  margin-top: 14px;
+}
+
+.skeleton--line-short {
+  width: 70%;
+}
+
+.skeleton--button {
+  height: 44px;
+  margin-top: 28px;
+  border-radius: var(--radius-md);
+}
+
 /* =========================================
    Profile Card
    ========================================= */
@@ -912,6 +1029,7 @@
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
 }
